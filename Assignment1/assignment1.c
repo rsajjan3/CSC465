@@ -3,10 +3,9 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h>
-
-int main(int argc, char **argv)
+void problem1()
 {
-    pid_t childPID = 0;
+        pid_t childPID = 0;
     printf("[Level0]myPID: %d, parentPID: %d\n", getpid(), getppid());
     for(int level1 = 0;level1 < 4; level1++) // Create 4 processes at level 1
     {
@@ -56,5 +55,13 @@ int main(int argc, char **argv)
             wait(0);
         }
     }
+}
+//https://stackoverflow.com/questions/5656530/how-to-use-shared-memory-with-linux-in-c
+void problem2()
+{
+
+}
+int main(int argc, char **argv)
+{
     return 0;
 }
