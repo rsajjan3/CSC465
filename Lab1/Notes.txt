@@ -1,0 +1,57 @@
+ ps
+    PID TTY          TIME CMD
+    2249 pts/0    00:00:00 bash
+    2335 pts/0    00:00:00 ps
+cat proc/2249/stat
+    2249 (bash) S 2248 2249 2249 34816 2337 4194304 1165 1460 1 1 3 0 0 0 20 0 1 0 2770 24395776 1278 18446744073709551615 4194304 5192556 140730884934704 140730884933368 140019140214906 0 65536 3670020 1266777851 1 0 0 17 2 0 0 1 0 0 7290352 7326856 26513408 140730884943220 140730884943226 140730884943226 140730884943854 0
+cat proc/2249/status
+    Name:	bash
+    State:	S (sleeping)
+    Tgid:	2249
+    Ngid:	0
+    Pid:	2249
+    PPid:	2248
+    TracerPid:	0
+    Uid:	1000	1000	1000	1000
+    Gid:	1000	1000	1000	1000
+    FDSize:	256
+    Groups:	4 24 27 30 46 113 130 1000 
+    NStgid:	2249
+    NSpid:	2249
+    NSpgid:	2249
+    NSsid:	2249
+    VmPeak:	   23824 kB
+    VmSize:	   23824 kB
+    VmLck:	       0 kB
+    VmPin:	       0 kB
+    VmHWM:	    5112 kB
+    VmRSS:	    5112 kB
+    VmData:	    1488 kB
+    VmStk:	     136 kB
+    VmExe:	     976 kB
+    VmLib:	    2312 kB
+    VmPTE:	      68 kB
+    VmPMD:	      12 kB
+    VmSwap:	       0 kB
+    HugetlbPages:	       0 kB
+    Threads:	1
+    SigQ:	0/7831
+    SigPnd:	0000000000000000
+    ShdPnd:	0000000000000000
+    SigBlk:	0000000000010000
+    SigIgn:	0000000000380004
+    SigCgt:	000000004b817efb
+    CapInh:	0000000000000000
+    CapPrm:	0000000000000000
+    CapEff:	0000000000000000
+    CapBnd:	0000003fffffffff
+    CapAmb:	0000000000000000
+    Seccomp:	0
+    Cpus_allowed:	7
+    Cpus_allowed_list:	0-2
+    Mems_allowed:	00000000,00000001
+    Mems_allowed_list:	0
+    voluntary_ctxt_switches:	149
+    nonvoluntary_ctxt_switches:	3
+
+1.)

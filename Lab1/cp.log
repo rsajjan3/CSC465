@@ -1,0 +1,26 @@
+
+
+        Monitoring /proc/2587/stat:
+
+Time        State           SysTm    UsrTm
+  0     Sleeping(disk)         0        0
+  1     Sleeping(memory)       1        0
+  2     Sleeping(memory)       1        0
+  3     Sleeping(memory)       1        0
+  4     Running               96        0
+  5     Sleeping(disk)       191        0
+  6     Running              286        0
+  7     Running              379        0
+  8     Sleeping(disk)       475        0
+  9     Sleeping(disk)       568        0
+ 10     Running              664        0
+ 11     Running              760        0
+ 12     Running              856        0
+ 13     Sleeping(disk)       952        0
+ 14     Sleeping(disk)      1049        0
+ 15     Running             1142        0
+ 16     Running             1235        0
+ 17     Running             1328        0
+ 18     Running             1419        0
+ 19     Running             1510        0
+procmon: Cannot open /proc/2587/stat, the monitored process is not running any more.

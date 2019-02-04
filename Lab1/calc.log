@@ -1,0 +1,26 @@
+
+
+        Monitoring /proc/2631/stat:
+
+Time        State           SysTm    UsrTm
+  0     Sleeping(memory)       0        0
+  1     Sleeping(memory)       0        0
+  2     Sleeping(memory)       0        0
+  3     Running                0        0
+  4     Sleeping(memory)       0       92
+  5     Sleeping(memory)       0       92
+  6     Sleeping(memory)       0       92
+  7     Running                0      102
+  8     Sleeping(memory)       0      184
+  9     Sleeping(memory)       0      184
+ 10     Sleeping(memory)       0      184
+ 11     Running                0      202
+ 12     Sleeping(memory)       0      276
+ 13     Sleeping(memory)       0      276
+ 14     Sleeping(memory)       0      276
+ 15     Running                0      304
+ 16     Sleeping(memory)       0      369
+ 17     Sleeping(memory)       0      369
+ 18     Sleeping(memory)       0      369
+ 19     Running                0      404
+procmon: Cannot open /proc/2631/stat, the monitored process is not running any more.
