@@ -6,6 +6,10 @@
 #include <sys/wait.h>
 #include <sys/mman.h>
 
+#define PROC1_READ 0
+#define PROC2_WRITE 1
+#define PROC2_READ 2
+#define PROC1_WRITE 3
 const char *Situation[6] = {"The light is turning green", "There is a pedestrian in front of me", "The car in front of me just stopped", "The car in front of me is moving", "The road is turning to the right", "\0"};
 const char *Recommendation[6] = {"Press the accelerator", "Press the break", "Press the break", "Press the accelerator", "Steer right", "\0"};
 const char *Action[5] = {"Done", "Oops, I pressed the break instead", "Oops, I pressed the accelerator instead", "Oops, I steered left", "\0" };
@@ -124,10 +128,115 @@ void problem2()
     }
 }
 
+void problem3()
+{
+    int fd[4];
+    int length = 0;
+    //{Message_Index, 0: Parent_Ready 1: Child_Ready}
+    int messenger[2] = {0, 0};
+    for(int i = 0; i < 2; i++)
+    {
+        if(pipe(fd + (i*2)) < 0)
+        {
+            printf("RIP pipes");
+            exit(1);
+        }
+    }
+    if(fork() == 0) //Child
+    {
+        //Close uneeded stuff
+        close(fd[PROC1_READ]);
+        close(fd[PROC1_WRITE]);
+
+        srand(time(NULL));
+        int choice = rand() % 5;
+
+        messenger[0] = choice; //Picking the situation
+        messenger[1] = 1; //Child_Ready
+        printf("Student: %s\n", Situation[choice]);
+        if (write(fd[PROC2_WRITE], &messenger, sizeof(messenger)) != sizeof(messenger))
+        {
+            printf("Student: FAILURE TO SEND\n");
+            exit(1);
+        }
+
+        length = read(fd[PROC2_READ], &messenger, sizeof(messenger));
+        if(length > 0)
+        {
+            //Read in info
+            if ((rand() % 2) == 0) //0: Student performs correct action
+            {
+                messenger[0] = 0; //Responding "Done"
+                messenger[1] = 1; //Child_Ready
+                printf("Student: %s\n", Action[messenger[0]]);
+                if(write(fd[PROC2_WRITE], &messenger, sizeof(messenger)) != sizeof(messenger))
+                {
+                    printf("Student: FAILURE TO SEND2\n");
+                    exit(1);
+                }
+            }
+            else //1: Student performs wrong action
+            {
+                choice = messenger[0]; //Recommendation
+                if (choice == 0) messenger[0] = 1; //Picking the wrong action based on recommendation
+                else if (choice == 1) messenger[0] = 2;
+                else if (choice == 2) messenger[0] = 2;
+                else if (choice == 3) messenger[0] = 1;
+                else if (choice == 4) messenger[0] = 3;
+                messenger[1] = 1; //Child Ready
+                printf("Student: %s\n", Action[messenger[0]]);
+                if(write(fd[PROC2_WRITE], &messenger, sizeof(messenger)) != sizeof(messenger))
+                {
+                    printf("Student: FAILURE TO SEND2\n");
+                    exit(1);
+                }   
+            }
+        }
+        close(fd[PROC2_READ]);
+        close(fd[PROC2_WRITE]);
+        exit(0);
+    }
+    else //Parent
+    {
+        //Close uneeded stuff
+        close(fd[PROC2_READ]);
+        close(fd[PROC2_WRITE]);
+
+        //First message from student
+        length = read(fd[PROC1_READ], &messenger, sizeof(messenger));
+        if(length > 0)
+        {
+            //Read in info
+            int choice = messenger[0]; //Situation
+            messenger[0] = choice; //Recommendation. Situation and Recommendation indicies match up. Line is un-needed, but is nice for seeing what's going on
+            messenger[1] = 0; //Parent_Ready
+            printf("Teacher: %s\n", Recommendation[choice]);
+            if (write(fd[PROC1_WRITE], &messenger, sizeof(messenger)) != sizeof(messenger))
+            {
+                printf("Teacher: FAILURE TO SEND\n");
+                exit(1);
+            }
+            close(fd[PROC1_WRITE]); //No longer need to write
+        }
+
+        //Second message from student
+        length = read(fd[PROC1_READ], &messenger, sizeof(messenger));
+        if(length > 0)
+        {
+            wait(0); //Wait for student to finish
+            if(messenger[0] == 0) printf("Teacher: What a good teacher I am!\n");
+            else printf("Teacher: What a lousy teacher I am!\n");
+            close(fd[PROC1_READ]); //Done reading
+        }
+    }
+}
 int main(int argc, char **argv)
 {
-    //problem1();
-    //printf("\n\n\n");
+    problem1();
+    printf("\n\n\n");
     problem2();
+    printf("\n\n\n");
+    sleep(1); //Without sleep, the rand produces the same value for both
+    problem3();
     return 0;
 }
