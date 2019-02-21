@@ -26,7 +26,8 @@ void problem1()
         { 
             printf("\t[Level1]myPID: %d, parentPID: %d\n",getpid(),getppid());
 
-            for(int level2 = 0; level2 < level1; level2++) { //Create 5 processes at level 2
+            for(int level2 = 0; level2 < level1; level2++) //Create 5 processes at level 2
+            {
                 if(level1 > 1)
                 {
                     childPID = fork();
@@ -35,7 +36,8 @@ void problem1()
                     {
                         printf("\t\t[Level2]myPID: %d, parentPID: %d\n",getpid(),getppid());
 
-                        for(int level3 = 0; level3 < level2; level3++) { //Create 2 processes at level 3
+                        for(int level3 = 0; level3 < level2; level3++) //Create 2 processes at level 3
+                        {
                             if(level1 > 2)
                             {
                                 childPID = fork();
