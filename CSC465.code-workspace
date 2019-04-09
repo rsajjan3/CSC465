@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"signal.h": "c"
+			"signal.h": "c",
+			"pthread.h": "c"
 		},
 		"files.exclude": {
 			"**/.classpath": true,
