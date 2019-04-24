@@ -7,7 +7,8 @@
 	"settings": {
 		"files.associations": {
 			"signal.h": "c",
-			"pthread.h": "c"
+			"pthread.h": "c",
+			"linkedlist.h": "c"
 		},
 		"files.exclude": {
 			"**/.classpath": true,
