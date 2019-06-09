@@ -1,5 +1,6 @@
 #ifndef LINKEDLIST_H_INCLUDED
 #define LINKEDLIST_H_INCLUDED
+
 //https://codereview.stackexchange.com/questions/212041/linked-list-written-in-c
 typedef struct
 {
@@ -30,7 +31,7 @@ void set_node_val(NODE *node, Segment val);
 NODE *create_node(Segment data);
 
 /**
- * Appends a node to the end of the linked list
+ * Sorted add to the linked list
  * @param head - first node
  * @param to_add - node to add
  * @return head node
@@ -65,14 +66,5 @@ void print_all(const NODE *head);
  * @param head - first node to start traversing from
  */
 void free_all(NODE *head);
-// void init(NODE **head);
-// void print_list(NODE *head);
-// NODE *add(NODE *node, Segment data);
-// void add_at(NODE *node, Segment data);
-// void remove_node(NODE *head);
-// NODE *reverse_rec(NODE *ptr, NODE *previous);
-// NODE *reverse(NODE *node);
-// NODE *free_list(NODE *head);
-// NODE *sort_list(NODE *head);
 
 #endif //LINKEDLIST_H_INCLUDED

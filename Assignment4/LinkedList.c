@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
-//https://gist.github.com/ArnonEilat/4470948
+//https://codereview.stackexchange.com/questions/212041/linked-list-written-in-c
 
 Segment get_node_val(const NODE *node) {
     return node->data;
@@ -46,7 +46,7 @@ NODE *append_node(NODE *head, NODE *to_add) {
         while (current->next != NULL && current->next->data.base < to_add->data.base) {
             current = current->next;
         }
-        // At the end, now let's add our new node
+        
         to_add->next = current->next;
         current->next = to_add;
     }
